@@ -14,7 +14,7 @@ function TaskDetails() {
 
     useEffect(() => {
       const fetchTask = async () => {
-        const res = await fetch(`http://localhost:5000/tasks/${params.id}`)
+        const res = await fetch(`/tasks/${params.id}`)
         const data = await res.json()
                
         setTask(data)
