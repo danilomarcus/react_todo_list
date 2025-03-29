@@ -12,6 +12,9 @@ const App = () => {
   const [tasks, setTasks] = useState([])
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
+  console.log(API_URL);
+  console.log(`${window.location.origin}`);
+
   useEffect(() => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks()
