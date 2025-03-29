@@ -10,6 +10,7 @@ import TaskDetails from "./components/TaskDetails";
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTasks] = useState([])
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const getTasks = async () => {
@@ -22,7 +23,7 @@ const App = () => {
 
   // Fetch Tasks from json server
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks')
+    const res = await fetch(`${API_URL}/tasks`)
     const data = await res.json()
 
     return data
@@ -30,7 +31,7 @@ const App = () => {
 
   // Fetch single Task
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`)
+    const res = await fetch(`${API_URL}/tasks/${id}`)
     const data = await res.json()
 
     return data
@@ -39,7 +40,7 @@ const App = () => {
    // Add Task
    const addTask = async (task) => {
     console.log(task)
-    const res = await fetch('http://localhost:5000/tasks', {
+    const res = await fetch(`${API_URL}/tasks`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -59,7 +60,7 @@ const App = () => {
 
   // Delete Task
   const deleteTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const res = await fetch(`${API_URL}/tasks/${id}`, {
       method: 'DELETE',
     })
     // We should control the response status to decide if we will change the state or not.
@@ -73,7 +74,7 @@ const App = () => {
     const taskToToggle = await fetchTask(id)
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
 
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const res = await fetch(`${API_URL}/tasks/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
